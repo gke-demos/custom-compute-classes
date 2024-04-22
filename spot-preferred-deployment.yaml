@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spot-preferred
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spot-preferred
+  template:
+    metadata:
+      labels:
+        app: spot-preferred
+    spec:
+      nodeSelector:
+        autoscaling.gke.io/node-provisioning-config: spot-preferred
+      containers:
+      - name: test
+        image: gcr.io/google_containers/pause
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1Gi"
+      tolerations:
+      - key: autoscaling.gke.io/node-provisioning-config
+        value: spot-preferred
+        operator: Equal
+        effect: NoSchedule

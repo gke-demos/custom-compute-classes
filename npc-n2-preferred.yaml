@@ -1,0 +1,15 @@
+apiVersion: autoscaling.gke.io/v1alpha1
+kind: NodeProvisioningConfig
+metadata:
+  name: n2-preferred
+spec:
+  priorities:
+    rules:
+    - byNodeConfig:
+        family: n2
+    - byNodeConfig:
+        family: e2
+  nodePoolAutoCreation:
+    enabled: true
+  activeMigration:
+    optimizeRulePriority: true

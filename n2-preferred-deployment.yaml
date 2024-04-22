@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: n2-preferred
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: n2-preferred
+  template:
+    metadata:
+      labels:
+        app: n2-preferred
+    spec:
+      nodeSelector:
+        autoscaling.gke.io/node-provisioning-config: n2-preferred
+      containers:
+      - name: test
+        image: gcr.io/google_containers/pause
+        resources:
+          requests:
+            cpu: "1"
+            memory: "4Gi"
+      tolerations:
+      - key: autoscaling.gke.io/node-provisioning-config
+        value: n2-preferred
+        operator: Equal
+        effect: NoSchedule
