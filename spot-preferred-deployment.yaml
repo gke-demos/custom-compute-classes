@@ -13,7 +13,7 @@ spec:
         app: spot-preferred
     spec:
       nodeSelector:
-        autoscaling.gke.io/node-provisioning-config: spot-preferred
+        cloud.google.com/compute-class: spot-preferred
       containers:
       - name: test
         image: gcr.io/google_containers/pause
@@ -21,8 +21,3 @@ spec:
           requests:
             cpu: "1"
             memory: "1Gi"
-      tolerations:
-      - key: autoscaling.gke.io/node-provisioning-config
-        value: spot-preferred
-        operator: Equal
-        effect: NoSchedule

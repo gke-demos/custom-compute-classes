@@ -13,7 +13,7 @@ spec:
         app: n2-preferred
     spec:
       nodeSelector:
-        autoscaling.gke.io/node-provisioning-config: n2-preferred
+        cloud.google.com/compute-class: n2-preferred
       containers:
       - name: test
         image: gcr.io/google_containers/pause
@@ -21,8 +21,3 @@ spec:
           requests:
             cpu: "1"
             memory: "4Gi"
-      tolerations:
-      - key: autoscaling.gke.io/node-provisioning-config
-        value: n2-preferred
-        operator: Equal
-        effect: NoSchedule

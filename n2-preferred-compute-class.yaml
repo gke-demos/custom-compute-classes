@@ -1,0 +1,14 @@
+apiVersion: cloud.google.com/v1
+kind: ComputeClass
+metadata:
+  name: n2-preferred
+spec:
+  priorities:
+  - machineFamily: n2
+  - machineFamily: n2d
+  activeMigration:
+    optimizeRulePriority: true
+  autoscalingPolicy:
+    consolidationDelayMinutes: 1
+  nodePoolAutoCreation:
+    enabled: true
